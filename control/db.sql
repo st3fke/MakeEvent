@@ -25,8 +25,8 @@ CREATE TABLE aktivnosti (
     id_eventa INT,
     naziv_aktivnosti VARCHAR(100) NOT NULL,
     opis TEXT,
-    vreme_pocetka TIME NOT NULL,
-    vreme_zavrsetka TIME NOT NULL,
+    vreme_pocetka DATETIME NOT NULL,
+    vreme_zavrsetka DATETIME NOT NULL,
     lokacija VARCHAR(100),
     FOREIGN KEY (id_eventa) REFERENCES event(id_eventa)
 );
@@ -36,9 +36,17 @@ CREATE TABLE ucesnici (
     ime VARCHAR(50) NOT NULL,
     prezime VARCHAR(50) NOT NULL,
     email VARCHAR(100),
-    telefon VARCHAR(20),
-    id_eventa INT,
-    lokacija_smestaja VARCHAR(100), -- Automatska dodela smeštaja
-    cekiran BOOLEAN DEFAULT FALSE, -- Indikator da li je učesnik čekiran
-    FOREIGN KEY (id_eventa) REFERENCES event(id_eventa)
+    telefon VARCHAR(20)
 );
+
+CREATE TABLE ucesce
+(
+    id_ucesce INT AUTO_INCREMENT PRIMARY KEY,
+    id_ucenika INT,
+    id_eventa INT,
+    FOREIGN KEY (id_eventa) REFERENCES event(id_eventa),
+    FOREIGN KEY (id_ucenika) REFERENCES ucesnici(id_ucesnika),
+    opis VARCHAR(200)
+);
+
+
