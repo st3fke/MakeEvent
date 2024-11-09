@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Make Your Event</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <header class="header">
+            <h1>LOGIN TO YOUR ACCOUNT</h1>
+        </header>
+        <main class="login-content">
+            <p class="intro-text">
+                Welcome back! Please login to continue and manage your events or participate in exciting ones.
+            </p>
+            <form action="dashboard.html" method="POST" class="login-form">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <div class="bottom-links">
+                <p>Don't have an account? <a href="register-participant.html" class="register-link">Register as a Participant</a> or <a href="register-host.html" class="register-link">Register as a Host</a></p>
+                <p><a href="index.html" class="back-link">Back to Home</a></p>
+            </div>
+        </main>
+        <footer class="footer">
+            <p>&copy; 2024 Make Your Event. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
