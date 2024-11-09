@@ -32,7 +32,7 @@
             }
     
             // If everything is valid, submit the form
-            alert("Login successful!");
+            
             // Uncomment the line below to submit the form after validation
             // event.target.submit();
         }
@@ -46,7 +46,7 @@
             <p class="intro-text">
                 Welcome back! Please login to continue and manage your events or participate in exciting ones.
             </p>
-            <form action="dashboard.html" method="POST" class="login-form" onsubmit="validateLoginForm(event)">
+            <form action="/login" method="POST" class="login-form" >
                 <div class="input-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required placeholder="Enter your email">

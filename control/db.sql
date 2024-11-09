@@ -32,20 +32,21 @@ CREATE TABLE aktivnosti (
 );
 
 CREATE TABLE ucesnici (
-    id_ucesnika INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     ime VARCHAR(50) NOT NULL,
+    sifra VARCHAR(50) NOT NULL,
     prezime VARCHAR(50) NOT NULL,
-    email VARCHAR(100),
+    email VARCHAR(100) NOT NULL,
     telefon VARCHAR(20)
 );
 
 CREATE TABLE ucesce
 (
     id_ucesce INT AUTO_INCREMENT PRIMARY KEY,
-    id_ucenika INT,
+    id_ucesnika INT,
     id_eventa INT,
     FOREIGN KEY (id_eventa) REFERENCES event(id_eventa),
-    FOREIGN KEY (id_ucenika) REFERENCES ucesnici(id_ucesnika),
+    FOREIGN KEY (id_ucesnika) REFERENCES ucesnici(id),
     opis VARCHAR(200)
 );
 

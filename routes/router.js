@@ -5,24 +5,24 @@ const path = require('path');
 
 const router = express.Router();
 const connection = require("../control/config");
-app.use(express.urlencoded({ extended: true })); // Za parsiranje formi
-app.use(express.json());
+router.use(express.urlencoded({ extended: true })); // Za parsiranje formi
+router.use(express.json());
 
 const User = require("../models/User");
 User.setConnection(connection);
 
 
-app.use(session({
+router.use(session({
     secret: 'your-secret-key',  // Zaštita sesije
     resave: false,
     saveUninitialized: true
 }));
 
-app.post('/login', (req, res) => {
+router.post('/login', (req, res) => {
     const { email, password } = req.body;
-    
+    console.log("priprema");
     // SQL upit za pronalaženje korisnika po emailu
-    connection.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
+    connection.query('SELECT * FROM ucesnici WHERE email = ?', [email], (err, results) => {
         if (err) {
             return res.status(500).send('Database error');
         }
@@ -33,7 +33,18 @@ app.post('/login', (req, res) => {
 
         // Upoređivanje lozinki koristeći bcrypt
         const user = results[0];
-        bcrypt.compare(password, user.password, (err, isMatch) => {
+        console.log("Njegova sifra iz baze je:" + user.sifra);
+        console.log("Njegova sifra iz upita je:" + password);
+        if(password == user.sifra){
+            req.session.userId = user.id;
+            req.session.email = user.email;
+            return res.redirect("index");
+        } else {
+            return res.status(500).send('Error comparing passwords.'); 
+        }
+        /*
+        bcrypt.compare(password, user.sifra, (err, isMatch) => {
+            console.log("is Match:"+isMatch);
             if (err) {
                 return res.status(500).send('Error comparing passwords.');
             }
@@ -45,16 +56,15 @@ app.post('/login', (req, res) => {
             // Uspesno logovanje, čuvanje sesije
             req.session.userId = user.id;
             req.session.email = user.email;
-            req.session.role = user.role;
 
             // Preusmeravanje na dashboard
-            res.redirect('/dashboard');
-        });
+            console.log("ulogovan");
+        });*/
     });
 });
 
 // Ruta za dashboard (korisnički panel)
-app.get('/dashboard', (req, res) => {
+router.get('/dashboard', (req, res) => {
     if (!req.session.userId) {
         return res.redirect('/login');
     }
@@ -64,7 +74,7 @@ app.get('/dashboard', (req, res) => {
 });
 
 // Ruta za logout
-app.get('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             return res.status(500).send('Failed to logout');
@@ -77,6 +87,9 @@ router.get("/", (req,res)=>{
     res.render("mainlogpage");
 })
 
+router.get("/index", (req,res)=>{
+    res.render("index");
+})
 
 router.get("/login", (req,res)=>{
     res.render("login");
