@@ -7,6 +7,37 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script>
+        // Function to handle form validation on submit
+        function validateLoginForm(event) {
+            event.preventDefault();
+    
+            // Get form values
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+    
+            // Email validation pattern (basic)
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            
+            // Validate email
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+    
+            // Validate password (not empty)
+            if (password === "") {
+                alert("Password is required.");
+                return false;
+            }
+    
+            // If everything is valid, submit the form
+            alert("Login successful!");
+            // Uncomment the line below to submit the form after validation
+            // event.target.submit();
+        }
+    </script>
+    
     <div class="login-container">
         <header class="header">
             <h1>LOGIN TO YOUR ACCOUNT</h1>
@@ -15,7 +46,7 @@
             <p class="intro-text">
                 Welcome back! Please login to continue and manage your events or participate in exciting ones.
             </p>
-            <form action="dashboard.html" method="POST" class="login-form">
+            <form action="dashboard.html" method="POST" class="login-form" onsubmit="validateLoginForm(event)">
                 <div class="input-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required placeholder="Enter your email">
