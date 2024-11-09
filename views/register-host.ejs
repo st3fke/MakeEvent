@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Registration - Make Your Event</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // JavaScript function to handle form validation
+    
+    // JavaScript function to handle form validation
+    function validateForm(event) {
+        // Prevent form submission if validation fails
+        event.preventDefault();
+
+        var companyName = document.getElementById("company-name").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var phone = document.getElementById("phone").value;
+        var website = document.getElementById("website").value;
+        var organizationCheck = document.getElementById("organization").checked;
+
+        // Validate company name
+        if (companyName === "") {
+            alert("Company/Organization name is required.");
+            return false;
+        }
+
+        // Validate email using regular expression
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        // Validate password
+        if (password === "") {
+            alert("Password is required.");
+            return false;
+        }
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return false;
+        }
+
+        // Validate phone number using regular expression (10 digits)
+        var phonePattern = /^[0-9]{10}$/;
+        if (!phonePattern.test(phone)) {
+            alert("Please enter a valid phone number (10 digits).");
+            return false;
+        }
+
+        // Validate organization checkbox
+        if (!organizationCheck) {
+            alert("You must confirm that you are registering on behalf of an organization or company.");
+            return false;
+        }
+
+        // Optional website field: Validate if it's not empty
+        if (website !== "") {
+            var websitePattern = /^https?:\/\/.+\..+/;
+            if (!websitePattern.test(website)) {
+                alert("Please enter a valid website URL.");
+                return false;
+            }
+        }
+
+        // If everything is validated, submit the form
+        alert("Registration successful!");
+        // You can uncomment this line if you want to submit the form:
+        // event.target.submit();
+    }
+</script>
+
+    </script>
+</head>
+<body>
+    <div class="register-container">
+        <header class="header">
+            <h1>REGISTER AS A HOST</h1>
+        </header>
+        <main class="register-content">
+            <p class="intro-text">
+                As a Host, you'll be able to organize and manage events seamlessly. Whether you're a company or an organization, this platform allows you to create incredible experiences.
+            </p>
+            <!-- Form submission triggered by the validateForm function -->
+            <form class="register-form" onsubmit="validateForm(event)">
+                <div class="input-group">
+                    <label for="company-name">Company/Organization Name</label>
+                    <input type="text" id="company-name" name="company-name" required placeholder="Enter your company or organization name">
+                </div>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Create a password">
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" required placeholder="Enter your phone number">
+                </div>
+                <div class="input-group">
+                    <label for="website">Website (Optional)</label>
+                    <input type="url" id="website" name="website" placeholder="Enter your website URL (Optional)">
+                </div>
+                <div class="checkbox-group">
+                    <label for="organization">
+                        <input type="checkbox" id="organization" name="organization" required>
+                        I confirm that I am registering on behalf of an organization or company.
+                    </label>
+                </div>
+                <button type="submit" class="register-button">Register</button>
+            </form>
+            <div class="bottom-links">
+                <p>Already have an account? <a href="/login" class="login-link">Login here</a></p>
+                <p><a href="index.html" class="back-link">Back to Home</a></p>
+            </div>
+        </main>
+        <%- include("./partials/footer.ejs") %>
+    </div>
+</body>
+</html>

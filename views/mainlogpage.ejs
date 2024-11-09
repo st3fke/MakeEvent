@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Your Event - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>MAKE YOUR<br>EVENT</h1>
+        </header>
+        <main class="main-content">
+            <p class="intro-text">
+                Explore the perks of being a host or participant. Choose your role and make the most of every event!
+            </p>
+            <div class="options">
+                <div class="option-card host-card">
+                    <a href="/reg-host">
+                    <h2>HOST EVENT</h2>
+                    <p>Organize amazing events and keep everything under control.</p>
+                    </a>
+                </div>
+                <div class="option-card participant-card">
+                    <a href="/reg-participant">
+                    <h2>PARTICIPATE EVENT</h2>
+                    <p>Join events, engage with others, and enjoy every moment.</p>
+                    </a>
+                </div>
+            </div>
+            <p class="already-have-account">
+                Already have an account? <a href="/login" class="login-link">Log in here</a>
+            </p>
+        </main>
+        <%- include("./partials/footer.ejs") %>
+    </div>
+</body>
+</html>
